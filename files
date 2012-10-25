@@ -1,0 +1,8 @@
+--module amd -c
+
+Scripts/TS/Window.d.ts
+Scripts/TS/jQuery.d.ts
+Scripts/TS/ArrayExtensions.ts
+Scripts/TS/Util.ts
+
+Scripts/TS/main.ts
