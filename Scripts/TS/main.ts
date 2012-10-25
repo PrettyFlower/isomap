@@ -69,6 +69,10 @@ $(function() {
     tiles[6][4].topHeight = 1;
     
     tiles[9][2].height = 6;
+    tiles[9][2].botHeight = -1;
+    tiles[9][2].leftHeight = -1;
+    //tiles[9][2].rightHeight = -1;
+    //tiles[9][2].topHeight = -1;
     
     var start = new Date().getTime();
     
@@ -171,9 +175,19 @@ function makeTile(topHeight: number, botHeight: number, leftHeight: number, righ
     ctx.moveTo(r.x, r.y);
     ctx.lineTo(r.x, canvas.height);
     
-    for(var i = l.y + vHeight; i < canvas.height - vHeight; i += vHeight) {
+    if(leftHeight != -1 || botHeight != -1) {
+        ctx.moveTo(l.x, height / 2 + vHeight * 2);
+        ctx.lineTo(b.x, height + vHeight * 2);
+    }
+    if(rightHeight != -1 || botHeight != -1) {
+        ctx.moveTo(r.x, height / 2 + vHeight * 2);
+        ctx.lineTo(b.x, height + vHeight * 2);
+    }
+    
+    var start = Math.max(l.y, r.y);
+    for(var i = start + vHeight; i < canvas.height - vHeight; i += vHeight) {
         ctx.moveTo(l.x, i);
-        ctx.lineTo(b.x, i + (b.y - l.y));
+        ctx.lineTo(b.x, i + height / 2);
         ctx.lineTo(r.x, i);
     }
     
