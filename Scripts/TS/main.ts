@@ -1,3 +1,5 @@
+/// <reference path='Window.d.ts' />
+
 class Tile {
     constructor(public x: number, public y: number,
         public topHeight: number, public botHeight: number,
@@ -68,24 +70,30 @@ $(function() {
     tiles[6][3].botHeight = 1;
     tiles[6][4].topHeight = 1;
     
-    tiles[9][2].height = 6;
-    tiles[9][2].botHeight = -1;
-    tiles[9][2].leftHeight = -1;
+    tiles[9][2].height = 5;
+    //tiles[9][2].botHeight = -1;
+    //tiles[9][2].leftHeight = -1;
     //tiles[9][2].rightHeight = -1;
     //tiles[9][2].topHeight = -1;
     
-    var start = new Date().getTime();
-    
-    for(var y = 0; y < tiles[0].length; y++) {
-        for(var x = 0; x < tiles.length; x+=2) {
-            drawTile(ctx, tiles[x][y], tileImgs, width, height, vHeight);
+    var draw = function() {
+        //window.requestAnimFrame(draw);
+        var start = new Date().getTime();
+        
+        for(var y = 0; y < tiles[0].length; y++) {
+            for(var x = 0; x < tiles.length; x+=2) {
+                drawTile(ctx, tiles[x][y], tileImgs, width, height, vHeight);
+            }
+            for(var x = 1; x < tiles.length; x+=2) {
+                drawTile(ctx, tiles[x][y], tileImgs, width, height, vHeight);
+            }
         }
-        for(var x = 1; x < tiles.length; x+=2) {
-            drawTile(ctx, tiles[x][y], tileImgs, width, height, vHeight);
-        }
-    }
+        
+        console.log(new Date().getTime() - start);
+    };
     
-    console.log(new Date().getTime() - start);
+    draw();
+    //window.requestAnimFrame(draw);
 });
 
 function rh() {
